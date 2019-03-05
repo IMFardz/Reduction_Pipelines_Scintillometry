@@ -1,0 +1,8 @@
+# Reduction_Pipelines_Scintillometry
+Python scripts used to create waterfalls / folds given baseband data.
+Uses packages such as:
+scintillometry: github.com/mhvk/scintillometry
+baseband: github.com/mhvk/baseband
+astropy
+numpy
+scipy
