@@ -1,24 +1,22 @@
 import numpy as np
 from baseband import vdif
+from baseband.data import SAMPLE_VDIF
 import astropy.units as u
 import sys
 
 # File path of basbeand data
-path = '/Users/fardinsyed/Desktop/baseband/baseband/data/'
-filename = sys.argv[1]
-outnames = [filename + '_pol_' + str(i) for i in range(2)]
+outnames = [SAMPLE_VDIF.split("/")[-1].rstrip(".vdif") + '_pol_' + str(i) for i in range(2)]
 
 try:
     # Open stream reader and obtain file size
-    fh = vdif.open(path+filename+'.vdif','rs')
-    file_size = fh.fh_raw.seek(0, 2) // 2
+    fh = vdif.open(SAMPLE_VDIF,'rs')
     fh.fh_raw.seek(0)
     size = fh.seek(-1, 2)
     fh.seek(0)
 
     # Create stream writer for each polarization
-    fos = [vdif.open(outname+'.vdif','ws',sample_rate=fh.sample_rate,nthread=4,
-    nchan=1,samples_per_frame=fh.samples_per_frame, file_size=file_size) for outname in outnames]
+    fos = [vdif.open(outname + ".vdif",'ws',sample_rate=fh.sample_rate,nthread=4,
+    nchan=1,samples_per_frame=fh.samples_per_frame) for outname in outnames]
 
     # Write into output streams frame by frame
     while fh.fh_raw.tell() < size:
