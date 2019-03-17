@@ -33,7 +33,7 @@ class Fold:
         # Build the pipeline
         dedisperser = dispersion.Dedisperse(fh, dispersion_measure, 327*u.MHz,
                                             frequency=self.frequency, sideband=self.sideband)
-        channelizer = channelize.Channelize(dedisperser, 4096, frequency=self.frequency, sideband=self.sideband)
+        channelizer = channelize.Channelize(fh, 4096, frequency=self.frequency, sideband=self.sideband)
         if self.fullpol:
             power = functions.Power(channelizer, polarization=self.polarization)
         else:

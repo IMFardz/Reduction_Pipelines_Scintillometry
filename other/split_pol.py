@@ -4,7 +4,7 @@ from baseband.data import SAMPLE_VDIF
 import astropy.units as u
 import sys
 
-# File path of basbeand data
+# File names of output data
 outnames = [SAMPLE_VDIF.split("/")[-1].rstrip(".vdif") + '_pol_' + str(i) for i in range(2)]
 
 try:
